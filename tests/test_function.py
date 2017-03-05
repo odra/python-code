@@ -8,34 +8,6 @@ from smcode.function import Function
 from smcode import errors, helpers
 
 
-@pytest.fixture
-def hello_world_fn():
-  def fn():
-    return 'hello world'
-  return fn
-
-
-@pytest.fixture
-def greetings_fn():
-  def fn(name):
-    return 'hello %s' % name
-  return fn
-
-
-@pytest.fixture
-def greetings_default_fn():
-  def fn(name='nobody'):
-    return 'hello %s' % name
-  return fn
-
-
-@pytest.fixture
-def complex_fn():
-  def fn(name, age=32, **kwargs):
-    return '%s is %s years old and lives in %s' % (name, age, kwargs.get('country', 'nowhere'))
-  return fn
-
-
 def test_code_with_error():
   with pytest.raises(errors.ValidationError) as err:
     Function()
@@ -96,4 +68,10 @@ def test_complex_fn_arg(complex_fn):
   fn = Function(code=co, defaults=spec.defaults, fglobals=globals())
   assert fn('odra', 50) == 'odra is 50 years old and lives in nowhere'
 
+
+def test_complex_fn_arg_oder(complex_fn):
+  co = Code.from_fn(complex_fn)
+  spec = inspect.getargspec(complex_fn)
+  fn = Function(code=co, defaults=spec.defaults, fglobals=globals())
+  assert fn('odra', country='anywhere', age=100) == 'odra is 100 years old and lives in anywhere'
 

@@ -6,13 +6,6 @@ from smcode.code import Code
 from smcode import errors, helpers
 
 
-@pytest.fixture
-def hello_world_fn():
-  def fn():
-    return 'hello world'
-  return fn
-
-
 def test_code_with_error():
   with pytest.raises(errors.ValidationError) as err:
     Code()

@@ -3,16 +3,14 @@ from setuptools import setup, find_packages
 
 
 setup(
-  name='python code object sumatra module',
+  name='python code object sumatra module for python sdk and runner.',
   version='0.0.1',
-  description='Manages and builds code object type.',
+  description='Manages and builds code and function objects.',
   author='Sumatra',
   packages=find_packages(),
   install_requires=[
     'six==1.10.0',
-    'Sphinx==1.5.1',
-    'pytest==3.0.5'
+    'schematics==1.1.1'
   ],
-  setup_requires=['pytest-runner'],
   tests_require=['pytest', 'pytest-sugar']
 )

@@ -22,4 +22,3 @@ def test_from_code_defaults(complex_fn):
   spec = inspect.getargspec(complex_fn)
   fn = smcode.from_code(complex_fn.__code__, defaults=spec.defaults)
   assert fn('odra', country='anywhere') == 'odra is 32 years old and lives in anywhere'
-
